@@ -1,0 +1,46 @@
+# Project notes (do not commit)
+summary.md
+todo.md
+todo2.md
+LEARNING.md
+
+# Data
+data/raw/
+data/processed/
+
+# Per-fold model artifacts (large, regenerable from results/models/lgbm_params.json).
+# Keep lgbm_params.json itself — that's the tuned hyperparameters.
+results/models/*.pkl
+results/models/*.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+env/
+.env
+
+# Editors
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Local Claude harness directory
+.claude/

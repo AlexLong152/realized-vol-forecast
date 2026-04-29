@@ -1,0 +1,11 @@
+{
+  "num_leaves": 24,
+  "learning_rate": 0.02332078993558473,
+  "min_data_in_leaf": 55,
+  "feature_fraction": 0.6636976461559223,
+  "lambda_l2": 2.3536652308037196,
+  "objective": "regression",
+  "metric": "l2",
+  "verbosity": -1,
+  "seed": 42
+}

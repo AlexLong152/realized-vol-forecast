@@ -1,0 +1,19 @@
+# Pinned versions used during development. The library bounds live in
+# pyproject.toml; this file fixes the exact versions for reproducibility.
+# torch is intentionally omitted: install it from the PyTorch CUDA index
+# (see README) before running the LSTM step.
+numpy==1.26.4
+pandas==2.2.2
+pyarrow==16.1.0
+scipy==1.13.1
+yfinance==1.3.0
+pandas-datareader==0.10.0
+statsmodels==0.14.2
+arch==7.0.0
+lightgbm==4.3.0
+optuna==3.6.1
+shap==0.45.1
+matplotlib==3.9.0
+pytest==8.2.2
+black==24.4.2
+ruff==0.4.10
