@@ -139,7 +139,7 @@ The walk-forward and holdout rankings agree, the gaps are similar, and the holdo
 
 ![Rolling QLIKE per model](results/figures/rolling_qlike.png)
 
-60-day rolling QLIKE per model. Grey bands are NBER recessions. The ML models hold their advantage over HAR through 2008 and 2020 (the periods where forecasts matter most) and never blow up. GARCH consistently lags because the conditional-variance recursion can't keep up with the regime shifts inside a six-month test fold.
+60-day rolling QLIKE per model. Grey band indicates an NBER recession. The ML models hold their advantage over HAR through 2008 and 2020 (the periods where forecasts matter most) and never blow up. GARCH consistently lags because the conditional-variance recursion can't keep up with the regime shifts inside a six-month test fold.
 
 ### Per-model commentary
 
