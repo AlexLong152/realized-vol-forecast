@@ -67,7 +67,6 @@ The metrics themselves:
 - **Sharpe ratio**: `Sharpe = annualized_mean_return / annualized_vol`. From daily returns: mean is annualized with `× 252`, std with `× √252`. Higher is better; 1.0 is loosely "good," anything above 2 should be looked at suspiciously.
 - **Max drawdown (MDD)**: `MDD = min_t (P_t / max_{s ≤ t} P_s − 1)` where `P_t` is the equity curve. `MDD ≤ 0` always; closer to 0 is better. `MDD = −50%` ⇒ the curve once dropped to half its prior peak.
 - **Turnover**: sum of `|position_t − position_{t−1}|` across the sample. A turnover of 100 means the position changed by 100 units of leverage cumulatively. Drives transaction costs.
-- **Basis point (bp)**: one one-hundredth of one percent (`1bp = 0.0001`). "Net of 5bp per-turn transaction costs" subtracts `0.0005 × |Δposition|` from each day's return before computing the net Sharpe.
 
 ## Install
 
@@ -117,6 +116,24 @@ make holdout     # one-shot final-test evaluation on the last two years
 | har    | 0.407 |   0.147 |         (ref) |
 | garch  | 0.425 |   0.289 |        −96.1% |
 | naive  | 0.638 |   0.231 |        −56.8% |
+
+**Reading the `r²_oos vs HAR` column.** Rearrange the definition `r²_oos = 1 − SSE_model / SSE_HAR`:
+
+```
+SSE_model / SSE_HAR = 1 − r²_oos
+```
+
+So `r²_oos` maps directly to a multiplicative ratio of squared errors. Worked out for the walk-forward table:
+
+| model  | r²_oos  | SSE_model / SSE_HAR |
+|--------|--------:|--------------------:|
+| lstm   |  +13.5% |               0.865 |
+| lgbm   |   +7.7% |               0.923 |
+| har    |   (ref) |               1.000 |
+| garch  | −116.1% |               2.161 |
+| naive  |  −56.0% |               1.560 |
+
+LSTM's squared errors are about 86.5% the size of HAR's; GARCH's are 2.16× HAR's. The bound `r²_oos ≤ 1` (with equality only at perfect prediction) is the only meaningful one. There is no lower bound, which is why GARCH's `−116.1%` is real, not a typo.
 
 The walk-forward and holdout rankings agree, the gaps are similar, and the holdout numbers are the slightly worse of the two, which is what you want to see (no holdout overfit). Every pairwise Diebold–Mariano p-value is < 0.001, so the differences are statistically real, with the usual caveat that 10 pairwise tests deserve a multiple-testing correction (a Model Confidence Set is on the roadmap; see "What didn't work" below).
 
