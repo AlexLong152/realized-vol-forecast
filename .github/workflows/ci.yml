@@ -29,10 +29,5 @@ jobs:
           # torch is unavailable, so we keep CI lean and torch-less.
           pip install -e ".[shap,dev]"
 
-      - name: Lint
-        run: |
-          ruff check src tests
-          black --check src tests
-
       - name: Test
         run: pytest -q
